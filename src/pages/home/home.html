@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Фактури</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="true"
+    >
+    </ion-searchbar>
+    <button ion-item *ngFor="let firma of clientNames | filter: myInput" (click)="openFirma(firma)">
+
+      {{ firma }}
+    </button>
+  </ion-list>
+</ion-content>
+

@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{authService.selectedClient.Ime}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Статистка:
+    </ion-card-header>
+    <ion-grid>
+      <ion-row>
+        <ion-col>Вкупно: </ion-col>
+        <ion-col>{{authService.selectedClient.VkupenIznos}} ден.</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>Платено: </ion-col>
+        <ion-col>{{authService.selectedClient.Plateno}} ден.</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>Должи: </ion-col>
+        <ion-col>{{authService.selectedClient.VkupenIznos - authService.selectedClient.Plateno}} ден.</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <ion-card *ngFor="let invoice of authService.selectedClient.Invoices">
+    <ion-fab right *ngIf="invoice.Dolzi > 0">
+      <button ion-fab color="danger" mini>
+        <ion-icon name="ios-alert"></ion-icon>
+      </button>
+    </ion-fab>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>Број:</ion-col>
+          <ion-col>{{invoice.Broj}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Валута:</ion-col>
+          <ion-col>{{invoice.DatumNaDDO | date: 'dd.MM.yyyy'}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Рок на плаќање:</ion-col>
+          <ion-col>{{invoice.RokNaPlacanje | date: 'dd.MM.yyyy'}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Износ:</ion-col>
+          <ion-col>{{invoice.IznosSoDDV}} ден.</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Платено:</ion-col>
+          <ion-col>{{invoice.Plateno}} ден.</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Должи:</ion-col>
+          <ion-col><p [class.red]="invoice.Dolzi > 0"><b>{{invoice.Dolzi}}</b> ден.</p></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

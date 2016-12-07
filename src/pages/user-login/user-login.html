@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Vertex
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>Корисничко име</ion-label>
+      <ion-input [(ngModel)]='client.username' type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Лозинка</ion-label>
+      <ion-input [(ngModel)]='client.password' type="password"></ion-input>
+    </ion-item>
+
+
+  </ion-list>
+  <div padding>
+    <button ion-button block (click)="login()">Најави се</button>
+  </div>
+</ion-content>
