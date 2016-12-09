@@ -9,10 +9,13 @@ var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
 var app_component_1 = require('./app.component');
 var about_1 = require('../pages/about/about');
-var company_login_1 = require('../pages/user-login/company-login');
 var home_1 = require('../pages/home/home');
 var tabs_1 = require('../pages/tabs/tabs');
 var auth_service_1 = require("../services/auth.service");
+var company_login_1 = require("../pages/company-login/company-login");
+var user_login_1 = require("../pages/user-login/user-login");
+var invoices_1 = require("../pages/invoices/invoices");
+var filterPipe_1 = require("../pipes/filterPipe");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -22,8 +25,11 @@ var AppModule = (function () {
                 app_component_1.MyApp,
                 about_1.AboutPage,
                 company_login_1.CompanyLoginPage,
+                user_login_1.UserLoginPage,
                 home_1.HomePage,
-                tabs_1.TabsPage
+                tabs_1.TabsPage,
+                invoices_1.InvoicesPage,
+                filterPipe_1.filterPipe
             ],
             imports: [
                 ionic_angular_1.IonicModule.forRoot(app_component_1.MyApp)
@@ -33,8 +39,10 @@ var AppModule = (function () {
                 app_component_1.MyApp,
                 about_1.AboutPage,
                 company_login_1.CompanyLoginPage,
+                user_login_1.UserLoginPage,
                 home_1.HomePage,
-                tabs_1.TabsPage
+                tabs_1.TabsPage,
+                invoices_1.InvoicesPage
             ],
             providers: [{ provide: core_1.ErrorHandler, useClass: ionic_angular_1.IonicErrorHandler }, auth_service_1.AuthService]
         })

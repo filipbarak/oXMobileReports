@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require('@angular/core');
 var ionic_native_1 = require('ionic-native');
-var company_login_1 = require("../pages/user-login/company-login");
+var company_login_1 = require("../pages/company-login/company-login");
 var MyApp = (function () {
     function MyApp(platform) {
         this.rootPage = company_login_1.CompanyLoginPage;

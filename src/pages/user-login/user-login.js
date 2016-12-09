@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require('@angular/core');
+var home_1 = require("../home/home");
 var UserLoginPage = (function () {
     function UserLoginPage(navCtrl, authService) {
         this.navCtrl = navCtrl;
@@ -15,16 +16,16 @@ var UserLoginPage = (function () {
     UserLoginPage.prototype.login = function () {
         var _this = this;
         this.authService.postUsernameLogin(this.client.username, this.client.password)
-            .subscribe(function (token) {
-            console.log(token, "ok.");
-            _this.token = token;
+            .subscribe(function (data) {
+            _this.authService.token = data.token;
+            _this.navCtrl.setRoot(home_1.HomePage);
         }, function (err) {
             _this.token = 'Error;';
         });
     };
     UserLoginPage = __decorate([
         core_1.Component({
-            selector: 'company-login',
+            selector: 'user-login',
             templateUrl: 'user-login.html'
         })
     ], UserLoginPage);
