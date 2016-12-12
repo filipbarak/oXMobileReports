@@ -1,3 +1,3 @@
 # oXMobileReports
 
-Platform for displaying invoices.
+Platform for displaying invoices by client.
