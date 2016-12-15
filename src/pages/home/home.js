@@ -40,19 +40,21 @@ var HomePage = (function () {
                     Ime: invoice.Ime.trim(),
                     Kontakt: invoice.Kontakt,
                     Telefon: invoice.Telefon,
-                    VkupenIznos: 0,
-                    Plateno: 0
+                    Dolzi: invoice.Dolzi,
+                    DolziVkupno: 0
                 };
             }
             firmi[invoice.Ime].VkupenIznos += invoice.IznosSoDDV;
+            firmi[invoice.Ime].DolziVkupno += invoice.Dolzi;
             firmi[invoice.Ime].Plateno += invoice.Plateno;
             firmi[invoice.Ime].Invoices.push({
-                "DatumNaDDO": invoice.DatumNaDDO,
+                "Datum": invoice.Datum,
                 "RokNaPlacanje": invoice.RokNaPlacanje,
                 "IznosSoDDV": invoice.IznosSoDDV,
                 "Plateno": invoice.Plateno,
+                "Ime": invoice.Ime,
                 "Broj": invoice.Broj,
-                "Dolzi": invoice.IznosSoDDV - invoice.Plateno
+                "Dolzi": invoice.Dolzi
             });
         });
         return firmi;

@@ -9,9 +9,12 @@ var core_1 = require('@angular/core');
 var Rx_1 = require("rxjs/Rx");
 var http_1 = require("@angular/http");
 var AuthService = (function () {
-    function AuthService(http, router) {
+    function AuthService(http) {
         this.http = http;
-        this.router = router;
+        this.url = "http://localhost:3001/webapp";
+        this.korisnickoImeFirma = '';
+        this.token = '';
+        this.selectedClient = {};
     }
     AuthService.prototype.loginFirma = function (success, firmaId) {
         if (success) {
@@ -22,7 +25,6 @@ var AuthService = (function () {
     };
     AuthService.prototype.logoutFirma = function () {
         localStorage.removeItem('firmaId');
-        this.router.navigate(['/companyLogin']);
     };
     AuthService.prototype.getFirma = function () {
         return localStorage.getItem('firmaId');
@@ -44,7 +46,7 @@ var AuthService = (function () {
             var localToken = localStorage.getItem('token');
             var getHeaders = new http_1.Headers({ 'Content-Type': 'application/json' });
             if (localToken) {
-                _this.http.post("http://localhost:3001/webapp/validateToken", JSON.stringify({ token: localToken }), { headers: getHeaders })
+                _this.http.post(_this.url + "/webapp/validateToken", JSON.stringify({ token: localToken }), { headers: getHeaders })
                     .map(function (res) { return res.json(); })
                     .catch(function (error) { return Rx_1.Observable.throw(error.json().error || 'Server error'); })
                     .subscribe(function (data) {
@@ -60,7 +62,6 @@ var AuthService = (function () {
             }
             else {
                 resolve(false);
-                _this.router.navigate(['/companyLogin']);
             }
         });
     };
@@ -68,16 +69,38 @@ var AuthService = (function () {
         localStorage.removeItem('firmaId');
         localStorage.removeItem('username');
         localStorage.removeItem('token');
-        this.router.navigate(['/companyLogin']);
     };
     AuthService.prototype.getUserFirma = function () {
         return localStorage.getItem('username');
+    };
+    AuthService.prototype.postUsernameLogin = function (username, password) {
+        var body = JSON.stringify({
+            "companyIdentifier": this.korisnickoImeFirma,
+            "user": { "username": username, "password": password }
+        });
+        return this.http.post(this.url + "/login", body, { headers: new http_1.Headers({ 'Content-Type': 'application/json' }) })
+            .map(function (res) { return res.json(); });
+    };
+    AuthService.prototype.postCompanyLogin = function (korisnickoImeFirma) {
+        var body = JSON.stringify({ "companyIdentifier": korisnickoImeFirma });
+        return this.http.post(this.url + "/companyLogin", body, { headers: new http_1.Headers({ 'Content-Type': 'application/json' }) })
+            .map(function (res) { return res.json(); });
     };
     AuthService.prototype.isUserFirmaLoggedIn = function () {
         if (!this.getFirma()) {
             return false;
         }
         return this.getUserFirma() != null;
+    };
+    AuthService.prototype.getFakturi = function () {
+        var headers = new http_1.Headers();
+        headers.set('x-access-token', this.token);
+        console.log(this.token, "DES TOKEn .");
+        return this.http.get(this.url + "/fakturiIzvestaj", { headers: headers })
+            .map(function (response) { return response.json(); });
+    };
+    AuthService.prototype.handleError = function (error) {
+        console.error('An error occurred', error); // for demo purposes only
     };
     AuthService = __decorate([
         core_1.Injectable()

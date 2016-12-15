@@ -6,7 +6,7 @@ import {Response, Headers, Http} from "@angular/http";
 
 @Injectable()
 export class AuthService {
-  private url: string = "http://10.0.0.164:3001/webapp";
+  private url: string = "http://localhost:3001/webapp";
   korisnickoImeFirma: string = '';
   token: string = ''
   selectedClient: any = {};

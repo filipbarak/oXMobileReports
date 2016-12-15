@@ -19,7 +19,7 @@
       </ion-row>
       <ion-row>
         <ion-col>Должи: </ion-col>
-        <ion-col>{{authService.selectedClient.VkupenIznos - authService.selectedClient.Plateno}} ден.</ion-col>
+        <ion-col>{{authService.selectedClient.DolziVkupno}} ден.</ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>
@@ -38,11 +38,11 @@
         </ion-row>
         <ion-row>
           <ion-col>Валута:</ion-col>
-          <ion-col>{{invoice.DatumNaDDO | date: 'dd.MM.yyyy'}}</ion-col>
+          <ion-col>{{invoice.Datum| date: 'dd.MM.yyyy'}}</ion-col>
         </ion-row>
         <ion-row>
           <ion-col>Рок на плаќање:</ion-col>
-          <ion-col>{{invoice.RokNaPlacanje | date: 'dd.MM.yyyy'}}</ion-col>
+          <ion-col>{{invoice.RokNaPlacanje}}</ion-col>
         </ion-row>
         <ion-row>
           <ion-col>Износ:</ion-col>
