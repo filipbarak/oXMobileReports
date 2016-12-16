@@ -15,11 +15,11 @@
       </ion-row>
       <ion-row>
         <ion-col>Платено: </ion-col>
-        <ion-col>{{authService.selectedClient.Plateno}} ден.</ion-col>
+        <ion-col>{{authService.selectedClient.VkupnoPlateno}} ден.</ion-col>
       </ion-row>
       <ion-row>
         <ion-col>Должи: </ion-col>
-        <ion-col>{{authService.selectedClient.DolziVkupno}} ден.</ion-col>
+        <ion-col><p class="red">{{authService.selectedClient.DolziVkupno}} ден.</p></ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>
@@ -27,6 +27,16 @@
     <ion-fab right *ngIf="invoice.Dolzi > 0">
       <button ion-fab color="danger" mini>
         <ion-icon name="ios-alert"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-fab right *ngIf="!invoice.Dolzi > 0">
+      <button ion-fab color="success" mini>
+        <ion-icon name="checkmark-circle"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-fab right *ngIf="invoice.Dolzi < 0">
+      <button ion-fab color="secondary" mini>
+        <ion-icon name="checkmark-circle"></ion-icon>
       </button>
     </ion-fab>
 

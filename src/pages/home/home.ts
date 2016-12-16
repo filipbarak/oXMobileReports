@@ -22,6 +22,7 @@ export class HomePage {
       loading.dismiss();
       this.invoices = this.getUniqueFirmi(invoices);
       this.clientNames = Object.keys(this.invoices);
+
     })
   }
   openFirma(firma){
@@ -38,12 +39,14 @@ export class HomePage {
           Kontakt: invoice.Kontakt,
           Telefon: invoice.Telefon,
           Dolzi: invoice.Dolzi,
-          DolziVkupno: 0
+          DolziVkupno: 0,
+          VkupnoPlateno: 0,
+          VkupenIznos: 0
         };
       }
       firmi[invoice.Ime].VkupenIznos += invoice.IznosSoDDV;
       firmi[invoice.Ime].DolziVkupno+=invoice.Dolzi;
-      firmi[invoice.Ime].Plateno += invoice.Plateno;
+      firmi[invoice.Ime].VkupnoPlateno += invoice.Plateno;
       firmi[invoice.Ime].Invoices.push({
         "Datum": invoice.Datum,
         "RokNaPlacanje": invoice.RokNaPlacanje,
