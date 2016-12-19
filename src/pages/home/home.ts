@@ -3,6 +3,7 @@ import {Component} from '@angular/core';
 import {NavController, LoadingController} from 'ionic-angular';
 import {AuthService} from "../../services/auth.service";
 import {InvoicesPage} from "../invoices/invoices";
+import * as moment from 'moment';
 
 @Component({
   selector: 'page-home',
@@ -12,6 +13,7 @@ export class HomePage {
   invoices: any = {};
   private clientNames: any = [];
   myInput: string = '';
+  dateNow: Date;
   constructor(public authService: AuthService, private nav: NavController, private loadingCtrl: LoadingController) {
     let loading = this.loadingCtrl.create({
       content: 'Добивање на фактури...'
@@ -22,7 +24,8 @@ export class HomePage {
       loading.dismiss();
       this.invoices = this.getUniqueFirmi(invoices);
       this.clientNames = Object.keys(this.invoices);
-
+      this.dateNow = new Date();
+      console.log(moment().date());
     })
   }
   openFirma(firma){
@@ -59,5 +62,6 @@ export class HomePage {
     })
     return firmi;
   }
+
 
 }

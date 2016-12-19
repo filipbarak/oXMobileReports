@@ -9,11 +9,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
  * Created by Filip on 12/7/2016.
  */
 var core_1 = require('@angular/core');
+var moment = require('moment');
 var InvoicesPage = (function () {
     function InvoicesPage(authService) {
         this.authService = authService;
         this.aggregatedInfo = {};
+        this.dateNow = new Date();
+        this.getDatum();
     }
+    InvoicesPage.prototype.getDatum = function () {
+        this.authService.selectedClient.Invoices.forEach(function (invoice) {
+            var tryDatum = moment(invoice.Datum).fromNow();
+            return (tryDatum.indexOf('ago') != 1);
+            // console.log(typeof(moment(this.dateNow).format()));
+        });
+    };
     InvoicesPage = __decorate([
         core_1.Component({
             selector: 'invoices',

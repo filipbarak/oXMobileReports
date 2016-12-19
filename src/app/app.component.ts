@@ -3,7 +3,7 @@ import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import {CompanyLoginPage} from "../pages/company-login/company-login";
-
+import * as moment from 'moment';
 
 
 @Component({

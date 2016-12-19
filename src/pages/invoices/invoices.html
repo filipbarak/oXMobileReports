@@ -66,6 +66,10 @@
           <ion-col>Должи:</ion-col>
           <ion-col><p [class.red]="invoice.Dolzi > 0"><b>{{invoice.Dolzi}}</b> ден.</p></ion-col>
         </ion-row>
+        <ion-row>
+          <ion-col>Testing:</ion-col>
+          <ion-col *ngIf="!getDatum() && invoice.Dolzi > 0">поминат е рокот за плаќање.</ion-col>
+        </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>

@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require('@angular/core');
 var invoices_1 = require("../invoices/invoices");
+var moment = require('moment');
 var HomePage = (function () {
     function HomePage(authService, nav, loadingCtrl) {
         var _this = this;
@@ -25,6 +26,8 @@ var HomePage = (function () {
             loading.dismiss();
             _this.invoices = _this.getUniqueFirmi(invoices);
             _this.clientNames = Object.keys(_this.invoices);
+            _this.dateNow = new Date();
+            console.log(moment().date());
         });
     }
     HomePage.prototype.openFirma = function (firma) {
