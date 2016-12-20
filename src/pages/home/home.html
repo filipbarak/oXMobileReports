@@ -12,7 +12,9 @@
     </ion-searchbar>
     <button ion-item *ngFor="let firma of clientNames | filter: myInput" (click)="openFirma(firma)">
       <ion-icon *ngIf="invoices[firma].Dolzi > 0" name="ios-alert" style="color:red;"></ion-icon>
+      <ion-icon *ngIf="!getDatum && invoices[firma].Dolzi > 0" name="clock" style="color:blue;"></ion-icon>
       {{ firma }}
+
 
     </button>
   </ion-list>

@@ -26,8 +26,6 @@ var HomePage = (function () {
             loading.dismiss();
             _this.invoices = _this.getUniqueFirmi(invoices);
             _this.clientNames = Object.keys(_this.invoices);
-            _this.dateNow = new Date();
-            console.log(moment().date());
         });
     }
     HomePage.prototype.openFirma = function (firma) {
@@ -63,6 +61,25 @@ var HomePage = (function () {
             });
         });
         return firmi;
+    };
+    // getDatum() {
+    //   this.authService.getFakturi().subscribe(invoices => {
+    //     invoices.forEach(invoice => {
+    //       let tryDatum = moment(invoice.Datum).fromNow();
+    //       return (tryDatum.indexOf('ago') != 1);
+    //     });
+    //
+    //   });
+    // }
+    HomePage.prototype.testInvoices = function () {
+        this.authService.getFakturi().subscribe(function (invoices) {
+            console.log(invoices, "lololollol");
+            invoices.forEach(function (invoice) {
+                var tryDatum = moment(invoice.Datum).fromNow();
+                console.log(tryDatum);
+                return (tryDatum.indexOf('ago') != 1);
+            });
+        });
     };
     HomePage = __decorate([
         core_1.Component({

@@ -35,7 +35,7 @@
     </ion-segment>
   </div>
   <div [ngSwitch]="fakturi">
-    <ion-list *ngSwitchCase="'plateni'">
+    <ion-list  *ngSwitchCase="'plateni'">
   <ion-card *ngFor="let invoice of authService.selectedClient.Invoices | filterpaid">
 
     <ion-fab right *ngIf="invoice.Dolzi > 0">
@@ -66,7 +66,7 @@
         </ion-row>
         <ion-row>
           <ion-col>Рок на плаќање:</ion-col>
-          <ion-col>{{invoice.RokNaPlacanje}}</ion-col>
+          <ion-col>{{invoice.RokNaPlacanje}} дена.</ion-col>
         </ion-row>
         <ion-row>
           <ion-col>Износ:</ion-col>
@@ -81,8 +81,7 @@
           <ion-col><p [class.red]="invoice.Dolzi > 0"><b>{{invoice.Dolzi}}</b> ден.</p></ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>Testing:</ion-col>
-          <ion-col *ngIf="!getDatum() && invoice.Dolzi > 0">поминат е рокот за плаќање.</ion-col>
+          <ion-col *ngIf="!getDatum() && invoice.Dolzi > 0" style="color:red">рокот за плаќање е поминат.</ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>

@@ -14,6 +14,7 @@ export class HomePage {
   private clientNames: any = [];
   myInput: string = '';
   dateNow: Date;
+
   constructor(public authService: AuthService, private nav: NavController, private loadingCtrl: LoadingController) {
     let loading = this.loadingCtrl.create({
       content: 'Добивање на фактури...'
@@ -24,14 +25,15 @@ export class HomePage {
       loading.dismiss();
       this.invoices = this.getUniqueFirmi(invoices);
       this.clientNames = Object.keys(this.invoices);
-      this.dateNow = new Date();
-      console.log(moment().date());
-    })
+
+    });
   }
-  openFirma(firma){
+
+  openFirma(firma) {
     this.authService.selectedClient = this.invoices[firma];
     this.nav.push(InvoicesPage);
   }
+
   getUniqueFirmi(invoices) {
     let firmi = {};
     invoices.forEach(invoice => {
@@ -48,7 +50,7 @@ export class HomePage {
         };
       }
       firmi[invoice.Ime].VkupenIznos += invoice.IznosSoDDV;
-      firmi[invoice.Ime].DolziVkupno+=invoice.Dolzi;
+      firmi[invoice.Ime].DolziVkupno += invoice.Dolzi;
       firmi[invoice.Ime].VkupnoPlateno += invoice.Plateno;
       firmi[invoice.Ime].Invoices.push({
         "Datum": invoice.Datum,
@@ -63,5 +65,27 @@ export class HomePage {
     return firmi;
   }
 
+  // getDatum() {
+  //   this.authService.getFakturi().subscribe(invoices => {
+  //     invoices.forEach(invoice => {
+  //       let tryDatum = moment(invoice.Datum).fromNow();
+  //       return (tryDatum.indexOf('ago') != 1);
+  //     });
+  //
+  //   });
+  // }
+
+  testInvoices(){
+    this.authService.getFakturi().subscribe(invoices => {
+      console.log(invoices, "lololollol");
+      invoices.forEach(invoice => {
+        let tryDatum = moment(invoice.Datum).fromNow();
+        console.log(tryDatum);
+        return (tryDatum.indexOf('ago') != 1);
+
+      });
+
+    });
+  }
 
 }
