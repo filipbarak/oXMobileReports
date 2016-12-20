@@ -6,18 +6,25 @@ import {Response, Headers, Http} from "@angular/http";
 
 @Injectable()
 export class AuthService {
-  private url: string = "http://localhost:3001/webapp";
+  private url: string = "http://10.0.0.15:3001/webapp";
   korisnickoImeFirma: string = '';
-  token: string = ''
   selectedClient: any = {};
+  companyToken: string = '';
+  token: string = '';
+
   constructor(private http: Http) {
   }
+
   loginFirma(success, firmaId): boolean {
     if (success) {
       localStorage.setItem('firmaId', firmaId);
       return true;
     }
     return false;
+  }
+
+  setFirmaToken(token) {
+    localStorage.setItem('firmaToken', this.companyToken);
   }
 
   logoutFirma(): any {
@@ -29,21 +36,30 @@ export class AuthService {
     return localStorage.getItem('firmaId');
   }
 
+  getCompanyToken(): any {
+    return localStorage.getItem('firmaToken');
+  }
+
+  getUsername(): any {
+    return localStorage.getItem('username');
+  }
+
   isFirmaLoggedIn(): boolean {
     return this.getFirma() != null;
   }
 
-  loginUserFirma(success, token, username): boolean {
+  loginUserFirma(success, token, username, password): boolean {
     if (success) {
       localStorage.setItem('token', token);
       localStorage.setItem('username', username);
+      localStorage.setItem('password', password);
       return true;
     }
     return false;
   }
 
   getToken(): Promise<any> {
-    return new Promise((resolve)=> {
+    return new Promise((resolve) => {
         var localToken = localStorage.getItem('token');
         var getHeaders: Headers = new Headers({'Content-Type': 'application/json'});
         if (localToken) {
@@ -79,6 +95,9 @@ export class AuthService {
     return localStorage.getItem('username');
   }
 
+  getUserPasswordFirma(): any {
+    return localStorage.getItem('password');
+  }
 
   postUsernameLogin(username, password) {
     var body = JSON.stringify({
@@ -86,7 +105,7 @@ export class AuthService {
       "user": {"username": username, "password": password}
     });
     return this.http.post(`${this.url}/login`, body, {headers: new Headers({'Content-Type': 'application/json'})})
-      .map(res=>res.json());
+      .map(res => res.json());
 
   }
 
@@ -115,6 +134,7 @@ export class AuthService {
       .map(response => response.json())
 
   }
+
   private handleError(error: any): void {
     console.error('An error occurred', error); // for demo purposes only
   }
