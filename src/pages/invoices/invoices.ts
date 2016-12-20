@@ -16,6 +16,7 @@ export class InvoicesPage {
 
   };
   dateNow: Date;
+  enableFilter = false;
   constructor(private authService: AuthService) {
     this.dateNow = new Date();
     this.getDatum();

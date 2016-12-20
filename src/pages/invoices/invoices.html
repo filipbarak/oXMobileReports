@@ -23,7 +23,21 @@
       </ion-row>
     </ion-grid>
   </ion-card>
-  <ion-card *ngFor="let invoice of authService.selectedClient.Invoices">
+
+  <div padding>
+    <ion-segment [(ngModel)]="fakturi">
+      <ion-segment-button value="neplateni">
+        Платени
+      </ion-segment-button>
+      <ion-segment-button value="plateni">
+        Неплатени
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div [ngSwitch]="fakturi">
+    <ion-list *ngSwitchCase="'plateni'">
+  <ion-card *ngFor="let invoice of authService.selectedClient.Invoices | filterpaid">
+
     <ion-fab right *ngIf="invoice.Dolzi > 0">
       <button ion-fab color="danger" mini>
         <ion-icon name="ios-alert"></ion-icon>
@@ -73,4 +87,60 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
+      </ion-list>
+    <ion-list *ngSwitchCase="'neplateni'">
+      <ion-card *ngFor="let invoice of authService.selectedClient.Invoices | filterUnpaid">
+
+        <ion-fab right *ngIf="invoice.Dolzi > 0">
+          <button ion-fab color="danger" mini>
+            <ion-icon name="ios-alert"></ion-icon>
+          </button>
+        </ion-fab>
+        <ion-fab right *ngIf="!invoice.Dolzi > 0">
+          <button ion-fab color="success" mini>
+            <ion-icon name="checkmark-circle"></ion-icon>
+          </button>
+        </ion-fab>
+        <ion-fab right *ngIf="invoice.Dolzi < 0">
+          <button ion-fab color="secondary" mini>
+            <ion-icon name="checkmark-circle"></ion-icon>
+          </button>
+        </ion-fab>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>Број:</ion-col>
+              <ion-col>{{invoice.Broj}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>Валута:</ion-col>
+              <ion-col>{{invoice.Datum| date: 'dd.MM.yyyy'}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>Рок на плаќање:</ion-col>
+              <ion-col>{{invoice.RokNaPlacanje}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>Износ:</ion-col>
+              <ion-col>{{invoice.IznosSoDDV}} ден.</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>Платено:</ion-col>
+              <ion-col>{{invoice.Plateno}} ден.</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>Должи:</ion-col>
+              <ion-col><p [class.red]="invoice.Dolzi > 0"><b>{{invoice.Dolzi}}</b> ден.</p></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>Testing:</ion-col>
+              <ion-col *ngIf="!getDatum() && invoice.Dolzi > 0">поминат е рокот за плаќање.</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+      </ion-list>
+    </div>
 </ion-content>
+

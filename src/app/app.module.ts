@@ -10,6 +10,8 @@ import {CompanyLoginPage} from "../pages/company-login/company-login";
 import {UserLoginPage} from "../pages/user-login/user-login";
 import {InvoicesPage} from "../pages/invoices/invoices";
 import {filterPipe} from "../pipes/filterPipe";
+import {FilterByPaid} from "../pipes/filterByPaid";
+import {FilterByUnPaid} from "../pipes/filterByUnpaid";
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import {filterPipe} from "../pipes/filterPipe";
     HomePage,
     TabsPage,
     InvoicesPage,
-    filterPipe
+    filterPipe,
+    FilterByPaid,
+    FilterByUnPaid
   ],
   imports: [
     IonicModule.forRoot(MyApp)

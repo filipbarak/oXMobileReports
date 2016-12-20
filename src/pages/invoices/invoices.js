@@ -14,6 +14,7 @@ var InvoicesPage = (function () {
     function InvoicesPage(authService) {
         this.authService = authService;
         this.aggregatedInfo = {};
+        this.enableFilter = false;
         this.dateNow = new Date();
         this.getDatum();
     }

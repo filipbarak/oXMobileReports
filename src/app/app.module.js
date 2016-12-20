@@ -16,6 +16,8 @@ var company_login_1 = require("../pages/company-login/company-login");
 var user_login_1 = require("../pages/user-login/user-login");
 var invoices_1 = require("../pages/invoices/invoices");
 var filterPipe_1 = require("../pipes/filterPipe");
+var filterByPaid_1 = require("../pipes/filterByPaid");
+var filterByUnpaid_1 = require("../pipes/filterByUnpaid");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -29,7 +31,9 @@ var AppModule = (function () {
                 home_1.HomePage,
                 tabs_1.TabsPage,
                 invoices_1.InvoicesPage,
-                filterPipe_1.filterPipe
+                filterPipe_1.filterPipe,
+                filterByPaid_1.FilterByPaid,
+                filterByUnpaid_1.FilterByUnPaid
             ],
             imports: [
                 ionic_angular_1.IonicModule.forRoot(app_component_1.MyApp)
